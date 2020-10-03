@@ -88,6 +88,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZXE-hj-tVz">
                             <connections>
                                 <action selector="addNewElementPressed:" destination="BYZ-38-t0r" id="UXj-fa-KKX"/>
+                                <segue destination="msc-Y9-kQn" kind="show" identifier="AddNewElement" id="z4D-bZ-B3b"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
