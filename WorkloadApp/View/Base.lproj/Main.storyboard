@@ -56,9 +56,6 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
-                                                <connections>
-                                                    <segue destination="S3s-8j-tsK" kind="show" identifier="CreateNewCategory" id="HU4-fW-Aa9"/>
-                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
@@ -88,13 +85,14 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZXE-hj-tVz">
                             <connections>
                                 <action selector="addNewElementPressed:" destination="BYZ-38-t0r" id="UXj-fa-KKX"/>
-                                <segue destination="msc-Y9-kQn" kind="show" identifier="AddNewElement" id="z4D-bZ-B3b"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="dateLabel" destination="AAw-e9-8YE" id="CYZ-h1-tU4"/>
                         <outlet property="segmentsLabel" destination="Q6Z-Gy-cuW" id="0qG-TO-S6V"/>
+                        <segue destination="msc-Y9-kQn" kind="show" identifier="CreateNewTask" id="CpG-QP-LHn"/>
+                        <segue destination="S3s-8j-tsK" kind="show" identifier="CreateNewCategory" id="c6H-x6-lqD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

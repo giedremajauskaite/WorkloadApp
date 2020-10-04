@@ -1,0 +1,6 @@
+framework module Pods_WorkloadApp {
+  umbrella header "Pods-WorkloadApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

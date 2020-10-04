@@ -23,13 +23,31 @@ class WorkloadViewController: UIViewController {
         
     }
 
-
+//MARK: - addNewElementPressed
+    
     @IBAction func addNewElementPressed(_ sender: UIBarButtonItem) {
         
-        if segmentsLabel.selectedSegmentIndex == 0 {
-            print(segmentsLabel.titleForSegment(at: 0)!)
+        if segmentsLabel.selectedSegmentIndex == 1 {
+            
+            var textField = UITextField()
+            
+            let alert = UIAlertController(title: "Add new category", message: "", preferredStyle: .alert)
+            
+            let actionAdd = UIAlertAction(title: "Save", style: .default) { (action) in
+                //Create new category
+            }
+            
+            let actionCancel = UIAlertAction(title: "Cancel", style: .default) { (action) in
+                //Dismiss or present?
+            }
+            
+            alert.addAction(actionCancel)
+            alert.addAction(actionAdd)
+            
+            present(alert, animated: true, completion: nil )
+            
         } else {
-            print(segmentsLabel.titleForSegment(at: 1)!)
+            performSegue(withIdentifier: "CreateNewTask", sender: self)
         }
         
     }
