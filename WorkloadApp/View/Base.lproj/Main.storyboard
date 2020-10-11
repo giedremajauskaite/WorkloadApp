@@ -26,13 +26,12 @@
                                                 <rect key="frame" x="8" y="8" width="398" height="53"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="53" id="koS-fy-wBr"/>
-                                                    <constraint firstAttribute="width" constant="398" id="rVd-Uh-AVY"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="jzI-EA-owf">
+                                            <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="jzI-EA-owf">
                                                 <rect key="frame" x="8" y="103" width="398" height="56"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </searchBar>
@@ -64,18 +63,18 @@
                                         <rect key="frame" x="0.0" y="173" width="414" height="601"/>
                                         <subviews>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cb7-mB-oos">
-                                                <rect key="frame" x="8" y="16" width="398" height="585"/>
+                                                <rect key="frame" x="8" y="8" width="398" height="585"/>
                                                 <connections>
-                                                    <segue destination="nJY-FH-9RR" kind="embed" id="rd0-SU-YFh"/>
+                                                    <segue destination="nJY-FH-9RR" kind="embed" id="xEF-R6-mGW"/>
                                                 </connections>
                                             </containerView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="cb7-mB-oos" firstAttribute="top" secondItem="YkA-03-wxk" secondAttribute="top" constant="8" id="0AV-d4-mdB"/>
-                                            <constraint firstAttribute="bottom" secondItem="cb7-mB-oos" secondAttribute="bottom" constant="8" id="FV7-9H-hrP"/>
-                                            <constraint firstAttribute="trailing" secondItem="cb7-mB-oos" secondAttribute="trailing" constant="8" id="VtH-Qf-jLd"/>
-                                            <constraint firstItem="cb7-mB-oos" firstAttribute="leading" secondItem="YkA-03-wxk" secondAttribute="leading" constant="8" id="uYT-dL-r3j"/>
+                                            <constraint firstItem="cb7-mB-oos" firstAttribute="bottom" secondItem="YkA-03-wxk" secondAttribute="bottomMargin" id="5lX-T5-YK8"/>
+                                            <constraint firstItem="cb7-mB-oos" firstAttribute="trailing" secondItem="YkA-03-wxk" secondAttribute="trailingMargin" id="erq-iD-sAs"/>
+                                            <constraint firstItem="cb7-mB-oos" firstAttribute="top" secondItem="YkA-03-wxk" secondAttribute="topMargin" id="nkI-nZ-r38"/>
+                                            <constraint firstItem="cb7-mB-oos" firstAttribute="leading" secondItem="YkA-03-wxk" secondAttribute="leadingMargin" id="sT5-na-MOu"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -84,10 +83,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="pWm-C5-UuA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Gh0-Ut-E3e"/>
-                            <constraint firstItem="pWm-C5-UuA" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Vgm-sH-LyZ"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="pWm-C5-UuA" secondAttribute="bottom" id="e3B-zV-8dJ"/>
-                            <constraint firstItem="pWm-C5-UuA" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="mJ1-Qu-yP1"/>
+                            <constraint firstItem="pWm-C5-UuA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="PtZ-sg-j94"/>
+                            <constraint firstItem="pWm-C5-UuA" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="TpI-DK-Pd9"/>
+                            <constraint firstItem="pWm-C5-UuA" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="nAx-ux-Zq4"/>
+                            <constraint firstItem="pWm-C5-UuA" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="oQw-CC-mqv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Workload" id="M82-9n-LRM">
@@ -99,9 +98,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="dateLabel" destination="AAw-e9-8YE" id="CYZ-h1-tU4"/>
+                        <outlet property="searchBar" destination="jzI-EA-owf" id="aq9-EF-fC8"/>
                         <outlet property="segmentsLabel" destination="Q6Z-Gy-cuW" id="0qG-TO-S6V"/>
                         <segue destination="msc-Y9-kQn" kind="show" identifier="CreateNewTask" id="CpG-QP-LHn"/>
-                        <segue destination="S3s-8j-tsK" kind="show" identifier="CreateNewCategory" id="c6H-x6-lqD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -117,6 +116,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ryA-BV-bLh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="833" y="545"/>
+        </scene>
+        <!--DynamicTasksController-->
+        <scene sceneID="O37-0y-o52">
+            <objects>
+                <viewControllerPlaceholder storyboardName="DynamicTasks" referencedIdentifier="DynamicTasksController" id="F1L-Jh-5Gt" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gxr-bq-zth" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1230" y="544"/>
         </scene>
         <!--New Task View Controller-->
         <scene sceneID="NNC-Oa-QvZ">
@@ -170,42 +177,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q18-cx-CXP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1992.753623188406" y="77.678571428571431"/>
-        </scene>
-        <!--Items-->
-        <scene sceneID="VR8-Fe-uYI">
-            <objects>
-                <tableViewController id="S3s-8j-tsK" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zeB-NW-Xl3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="d8I-04-SGf">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </searchBar>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ItemCell" id="nuX-5G-K9p">
-                                <rect key="frame" x="0.0" y="72" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nuX-5G-K9p" id="jRF-Ol-Vbw">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="S3s-8j-tsK" id="jR9-gk-nFM"/>
-                            <outlet property="delegate" destination="S3s-8j-tsK" id="CXS-Ku-ZRa"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Items" id="vuY-RY-liA">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="K6N-S2-OaH"/>
-                    </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CDy-Q9-nNr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1993" y="781"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2k7-Wd-7HT">
