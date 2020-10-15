@@ -12,33 +12,34 @@ class WorkloadViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var segmentsLabel: UISegmentedControl!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var itemsContainer: UIView!
     
     var dynamicItemsController = DynamicItemsController()
     var dynamicTasksController = DynamicTasksController()
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-        super.viewWillAppear(animated)
-        
-        if segmentsLabel.selectedSegmentIndex == 0 {
-            
-             func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-                
-                if (segue.identifier == "GoToItem") {
-                
-                let destinationVC = segue.destination as! DynamicItemsController
-
-                    dynamicTasksController.loadTasks()
-                }
-            }
-            
-        }
-        else {
-            print("2")
-            dynamicItemsController.loadCategories()
-        }
-        
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//
+//        super.viewWillAppear(animated)
+//
+//        if segmentsLabel.selectedSegmentIndex == 0 {
+//            
+//             func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//                if (segue.identifier == "GoToItem") {
+//
+//                let destinationVC = segue.destination as! DynamicItemsController
+//
+//                    dynamicTasksController.loadTasks()
+//                }
+//            }
+//
+//        }
+//        else {
+//            print("2")
+//            dynamicItemsController.loadCategories()
+//        }
+//
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +50,33 @@ class WorkloadViewController: UIViewController, UISearchBarDelegate {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd"
         self.dateLabel.text = formatter.string(from: date)
+        
+        self.itemsContainer.isHidden = true
+        self.segmentsLabel.selectedSegmentIndex = 0
+        self.dynamicTasksController.loadTasks()
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "TasksSegue" {
+            let destinationVC = segue.destination as! DynamicTasksController
+            destinationVC.loadTasks()
+        } else if segue.identifier == "ItemsSegue" {
+            let destinationVC = segue.destination as! DynamicItemsController
+            destinationVC.loadCategories()
+        }
+        
+    }
+    
+    
+    @IBAction func segmentsIndexChanged(_ sender: UISegmentedControl) {
+        
+        if sender.selectedSegmentIndex == 0 {
+            self.itemsContainer.isHidden = true
+        } else {
+            self.itemsContainer.isHidden = false
+        }
         
     }
     
@@ -64,15 +92,18 @@ class WorkloadViewController: UIViewController, UISearchBarDelegate {
             let actionAdd = UIAlertAction(title: "Save", style: .default) { (action) in
                 //Create new category
                 let newCategory = Category()
+                
                 newCategory.title = textField.text!
                 
                 self.dynamicItemsController.save(category: newCategory)
+                self.dynamicItemsController.loadCategories()
                 
-                let tv : UITableViewController = self.children[0] as! DynamicItemsController
-                tv.tableView.reloadData()
-                tv.viewWillAppear(true)
                 
-            }
+//                let tv : UITableViewController = self.children[0] as! DynamicItemsController
+//                tv.tableView.reloadData()
+//                tv.viewWillAppear(true)
+                }
+                    
             
             alert.addTextField { (alertTextField) in
                 alertTextField.placeholder = "Create new Category"

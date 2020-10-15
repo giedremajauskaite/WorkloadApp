@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import RealmSwift
 
 class TasksTableViewController: UIViewController {
 
     @IBOutlet weak var taskName: UITextField!
     @IBOutlet weak var taskDate: UIDatePicker!
+    
+    var dynamicTasksController = DynamicTasksController()
     
     
     override func viewDidLoad() {
@@ -21,18 +24,18 @@ class TasksTableViewController: UIViewController {
     
     @IBAction func saveTask(_ sender: UIBarButtonItem) {
         
+        let newTask = Tasks()
         
+        if let taskName = taskName.text, !taskName.isEmpty {
+        
+            newTask.title = taskName
+            
+            dynamicTasksController.save(task: newTask)
+            
+        }
+        
+        navigationController?.popToRootViewController(animated: true)
         
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

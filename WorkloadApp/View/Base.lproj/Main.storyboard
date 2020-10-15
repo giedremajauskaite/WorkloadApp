@@ -41,6 +41,9 @@
                                                     <segment title="Tasks"/>
                                                     <segment title="Items"/>
                                                 </segments>
+                                                <connections>
+                                                    <action selector="segmentsIndexChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="wGh-Jd-Zuz"/>
+                                                </connections>
                                             </segmentedControl>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -62,10 +65,17 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YkA-03-wxk">
                                         <rect key="frame" x="0.0" y="173" width="414" height="601"/>
                                         <subviews>
-                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cb7-mB-oos">
+                                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cb7-mB-oos" userLabel="TasksContainer">
                                                 <rect key="frame" x="8" y="8" width="398" height="585"/>
                                                 <connections>
-                                                    <segue destination="nJY-FH-9RR" kind="embed" id="xEF-R6-mGW"/>
+                                                    <segue destination="F1L-Jh-5Gt" kind="embed" identifier="TasksSegue" id="HXc-c9-e11"/>
+                                                </connections>
+                                            </containerView>
+                                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CdT-Xw-ui7" userLabel="ItemsContainer">
+                                                <rect key="frame" x="8" y="8" width="398" height="585"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <connections>
+                                                    <segue destination="nJY-FH-9RR" kind="embed" identifier="ItemsSegue" id="d1Z-NC-8qj"/>
                                                 </connections>
                                             </containerView>
                                         </subviews>
@@ -98,6 +108,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="dateLabel" destination="AAw-e9-8YE" id="CYZ-h1-tU4"/>
+                        <outlet property="itemsContainer" destination="CdT-Xw-ui7" id="gkC-Kk-dBS"/>
                         <outlet property="searchBar" destination="jzI-EA-owf" id="aq9-EF-fC8"/>
                         <outlet property="segmentsLabel" destination="Q6Z-Gy-cuW" id="0qG-TO-S6V"/>
                         <segue destination="msc-Y9-kQn" kind="show" identifier="CreateNewTask" id="CpG-QP-LHn"/>
@@ -115,20 +126,22 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ryA-BV-bLh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="833" y="545"/>
+            <point key="canvasLocation" x="914" y="530"/>
         </scene>
         <!--DynamicTasksController-->
         <scene sceneID="O37-0y-o52">
             <objects>
-                <viewControllerPlaceholder storyboardName="DynamicTasks" referencedIdentifier="DynamicTasksController" id="F1L-Jh-5Gt" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="DynamicTasks" referencedIdentifier="DynamicTasksController" id="F1L-Jh-5Gt" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="MOG-ss-Rog"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gxr-bq-zth" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1230" y="544"/>
+            <point key="canvasLocation" x="1312" y="530"/>
         </scene>
-        <!--New Task View Controller-->
+        <!--Tasks Table View Controller-->
         <scene sceneID="NNC-Oa-QvZ">
             <objects>
-                <viewController id="msc-Y9-kQn" customClass="NewTaskViewController" customModule="WorkloadApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="msc-Y9-kQn" customClass="TasksTableViewController" customModule="WorkloadApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Aq-UN-2cb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -171,8 +184,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xFM-HF-PMn">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="tbc-iP-ChY"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="tbc-iP-ChY">
+                            <connections>
+                                <action selector="saveTask:" destination="msc-Y9-kQn" id="gRR-6Z-3GO"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="taskDate" destination="4np-YX-3NO" id="O1G-b8-ciE"/>
+                        <outlet property="taskName" destination="uLP-j0-8G1" id="v7A-F4-4pe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q18-cx-CXP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

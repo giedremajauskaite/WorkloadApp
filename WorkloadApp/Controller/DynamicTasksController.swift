@@ -15,6 +15,7 @@ class DynamicTasksController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         loadTasks()
 
     }
@@ -22,6 +23,7 @@ class DynamicTasksController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return tasksDBResults?.count ?? 1
     }
     
