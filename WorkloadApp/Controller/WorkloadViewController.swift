@@ -126,12 +126,12 @@ class WorkloadViewController: UIViewController, UISearchBarDelegate {
     }
 
 
- func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-
-}
-
- func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
-}
+// func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//
+//}
+//
+// func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//
+//}
 
 }
