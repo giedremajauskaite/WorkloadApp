@@ -102,7 +102,7 @@ class WorkloadViewController: UIViewController, UISearchBarDelegate {
 //                let tv : UITableViewController = self.children[0] as! DynamicItemsController
 //                tv.tableView.reloadData()
 //                tv.viewWillAppear(true)
-                }
+            }
                     
             
             alert.addTextField { (alertTextField) in
