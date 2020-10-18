@@ -9,6 +9,8 @@ import UIKit
 import RealmSwift
 
 class DynamicItemsController: UITableViewController, UISearchBarDelegate {
+    
+    @IBOutlet var categoriesDataSource: UITableView!
 
     var categoriesDBResults: Results<Category>?
     let realm = try! Realm()
@@ -16,9 +18,20 @@ class DynamicItemsController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        tableView.dataSource = self
+        tableView.delegate = self
         loadCategories()
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        loadCategories()
+        
+    }
+    
 
     // MARK: - Table view data source
 
@@ -55,7 +68,7 @@ class DynamicItemsController: UITableViewController, UISearchBarDelegate {
         } catch {
             print("Error saving context, \(error)")
         }
-        tableView.reloadData()
+        self.tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

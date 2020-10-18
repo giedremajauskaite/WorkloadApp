@@ -15,9 +15,15 @@ class DynamicTasksController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.delegate = self
+        tableView.dataSource = self
         loadTasks()
-
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.delegate = self
+        tableView.dataSource = self
+        loadTasks()
     }
 
     // MARK: - Table view data source

@@ -9,6 +9,7 @@ import Foundation
 import RealmSwift
 
 class Tasks: Object {
-    @objc dynamic var time: String = ""
+    @objc dynamic var time: Date?
     @objc dynamic var title: String = ""
+    @objc dynamic var alert: Int = 0
 }

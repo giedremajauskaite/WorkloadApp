@@ -13,6 +13,9 @@ class ItemsTableViewController: UITableViewController {
     
     @IBOutlet weak var itemsSearchBar: UISearchBar!
     
+    @IBOutlet var itemsDataSource: UITableView!
+    
+    
     var categoryItems: Results<Items>?
     let realm = try! Realm()
     var selectedCategory: Category? {
@@ -24,6 +27,7 @@ class ItemsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         itemsSearchBar.delegate = self
+   //     itemsDataSource.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,7 +60,7 @@ class ItemsTableViewController: UITableViewController {
     func loadItems() {
 
         categoryItems = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
-        tableView.reloadData()
+        self.tableView.reloadData()
     }
     
     
@@ -109,7 +113,7 @@ extension ItemsTableViewController: UISearchBarDelegate {
         
         categoryItems = categoryItems?.filter("title CONTAINS[cd] %@", itemsSearchBar.text!)
         
-        tableView.reloadData()
+        self.tableView.reloadData()
         
     }
     

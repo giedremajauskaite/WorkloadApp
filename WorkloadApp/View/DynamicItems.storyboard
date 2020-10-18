@@ -32,6 +32,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="YoC-7B-Icl"/>
                     <connections>
+                        <outlet property="categoriesDataSource" destination="WCE-a7-NTN" id="zQJ-sK-rh5"/>
                         <segue destination="WZ8-PM-rU1" kind="show" identifier="GoToItem" id="0dY-CC-qPx"/>
                     </connections>
                 </tableViewController>
@@ -93,6 +94,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="itemsDataSource" destination="Sm0-vi-Xzg" id="Ucb-Aa-fK9"/>
                         <outlet property="itemsSearchBar" destination="glv-a6-9iN" id="jgd-AT-HMp"/>
                     </connections>
                 </tableViewController>

@@ -13,33 +13,16 @@ class WorkloadViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var segmentsLabel: UISegmentedControl!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var itemsContainer: UIView!
+    @IBOutlet weak var tasksContainer: UIView!
+    
+ //   var tasksDataSource = TasksTableViewController()
+  //  var itemsDataSource = ItemsTableViewController()
     
     var dynamicItemsController = DynamicItemsController()
     var dynamicTasksController = DynamicTasksController()
     
-//    override func viewWillAppear(_ animated: Bool) {
-//
-//        super.viewWillAppear(animated)
-//
-//        if segmentsLabel.selectedSegmentIndex == 0 {
-//            
-//             func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//                if (segue.identifier == "GoToItem") {
-//
-//                let destinationVC = segue.destination as! DynamicItemsController
-//
-//                    dynamicTasksController.loadTasks()
-//                }
-//            }
-//
-//        }
-//        else {
-//            print("2")
-//            dynamicItemsController.loadCategories()
-//        }
-//
-//    }
+    var itemsVC = DynamicItemsController.self()
+    var tasksVC = DynamicTasksController.self()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,12 +36,13 @@ class WorkloadViewController: UIViewController, UISearchBarDelegate {
         
         self.itemsContainer.isHidden = true
         self.segmentsLabel.selectedSegmentIndex = 0
-        self.dynamicTasksController.loadTasks()
+    //    tasksContainer = tasksDataSource
+     //   self.dynamicTasksController.loadTasks()
         
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+
         if segue.identifier == "TasksSegue" {
             let destinationVC = segue.destination as! DynamicTasksController
             destinationVC.loadTasks()
@@ -74,11 +58,32 @@ class WorkloadViewController: UIViewController, UISearchBarDelegate {
         
         if sender.selectedSegmentIndex == 0 {
             self.itemsContainer.isHidden = true
+        //    tasksVC.tableView.reloadData()
+        //    print(tasksVC.tasksDBResults?.rel)
+       //     self.present(tasksVC, animated: false)
+        //    self.tasksContainer.isHidden = false
+        //    tasksVC.loadTasks()
+       //     performSegue(withIdentifier: "TasksSegue", sender: self)
+            
+    //        performSegue(withIdentifier: "TasksSegue", sender: self)
+//            self.dynamicTasksController.loadTasks()
         } else {
             self.itemsContainer.isHidden = false
+           // dynamicItemsController.loadCategories()
+          //  itemsVC.tableView.reloadData()
+         //  print(itemsVC.tableView.reloadData())
+        //    self.present(itemsVC, animated: false)
+         //   itemsVC.loadCategories()
+       //     self.tasksContainer.isHidden = true
+       //     itemsContainer = itemsDataSource.itemsDataSource
+            
+
+            
         }
         
     }
+    
+    
     
 //MARK: - addNewElementPressed
     
@@ -96,12 +101,7 @@ class WorkloadViewController: UIViewController, UISearchBarDelegate {
                 newCategory.title = textField.text!
                 
                 self.dynamicItemsController.save(category: newCategory)
-                self.dynamicItemsController.loadCategories()
-                
-                
-//                let tv : UITableViewController = self.children[0] as! DynamicItemsController
-//                tv.tableView.reloadData()
-//                tv.viewWillAppear(true)
+           //     self.dynamicItemsController.loadCategories()
             }
                     
             
