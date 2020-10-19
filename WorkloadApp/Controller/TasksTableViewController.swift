@@ -17,8 +17,8 @@ class TasksTableViewController: UIViewController  {
     var dynamicTasksController = DynamicTasksController()
     var alert = Alert()
     
-    var alertTime: Int  = 0
-    var datePicker: Date?
+    var alertTime: Int  = 90
+    var datePicker: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +26,16 @@ class TasksTableViewController: UIViewController  {
         alertPicker.dataSource = self
         
         //Default datePicker date
-        datePicker = Date()
+        
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        datePicker = df.string(from: Date())
     }
     
     @IBAction func datePickerChanged(_ sender: UIDatePicker) {
-        
-        datePicker = sender.date
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        datePicker = df.string(from: sender.date)
         
     }
     

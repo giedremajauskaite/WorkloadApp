@@ -17,6 +17,7 @@ class DynamicTasksController: UITableViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
         loadTasks()
     }
     
@@ -35,11 +36,17 @@ class DynamicTasksController: UITableViewController {
     
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath)
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
 
         if let task = tasksDBResults?[indexPath.row] {
-            cell.textLabel?.text = task.title
+            cell.titleLabel.text = task.title
+            cell.timeLabel.text = String(task.time.dropLast(3))
+            if task.alert == 90 {
+                cell.clockImageView.isHidden = true
+            } else {
+                cell.clockImageView.isHidden = false
+            }
         } else {
             cell.textLabel?.text = "No Items added"
         }
