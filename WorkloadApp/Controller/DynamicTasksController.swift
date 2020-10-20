@@ -11,41 +11,47 @@ import RealmSwift
 class DynamicTasksController: UITableViewController {
     
     var tasksDBResults: Results<Tasks>?
+
+    
     let realm = try! Realm()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
-        loadTasks()
+        
+   //     self.tableView.delegate = self
+   //     self.tableView.dataSource = self
+  //      tableView.register(UINib(nibName: "TaskCell", bundle: nil), forCellReuseIdentifier: "TaskCell")
+    //    loadTasks()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        tableView.delegate = self
-        tableView.dataSource = self
-        loadTasks()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        tableView.delegate = self
+//        tableView.dataSource = self
+//    //    loadTasks()
+//    }
 
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        print("number of rows: \(tasksDBResults!.count)")
         return tasksDBResults?.count ?? 1
     }
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! TaskCellTableViewCell
+        print("row: \(indexPath.row)")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath)
 
         if let task = tasksDBResults?[indexPath.row] {
-            cell.titleLabel.text = task.title
-            cell.timeLabel.text = String(task.time.dropLast(3))
+            cell.textLabel?.text = task.title
+            cell.detailTextLabel?.text = String(task.time.dropLast(3))
             if task.alert == 90 {
-                cell.clockImageView.isHidden = true
+                cell.imageView?.isHidden = true
             } else {
-                cell.clockImageView.isHidden = false
+                cell.imageView?.isHidden = false
             }
         } else {
             cell.textLabel?.text = "No Items added"
@@ -55,8 +61,16 @@ class DynamicTasksController: UITableViewController {
     }
 
     func loadTasks() {
+        
+        
         tasksDBResults = realm.objects(Tasks.self)
-        tableView.reloadData()
+        
+        print("loadtask: \(tasksDBResults!.count)")
+        
+        print("mainqueue: \(Thread.isMainThread)")
+        print("tableview: \(String(describing: self.tableView))")
+        
+        self.tableView.reloadData()
     }
 
     func save(task: Tasks) {
@@ -68,7 +82,7 @@ class DynamicTasksController: UITableViewController {
         } catch {
             print("Error saving context, \(error)")
         }
-        tableView.reloadData()
+        loadTasks()
     }
     
 //    override func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

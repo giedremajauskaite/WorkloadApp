@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,20 +16,22 @@
                 <rect key="frame" x="0.0" y="0.0" width="415" height="53"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" alignment="top" spacing="146" translatesAutoresizingMaskIntoConstraints="NO" id="SfT-zy-1YC">
-                        <rect key="frame" x="14" y="16" width="382" height="20.5"/>
+                    <stackView opaque="NO" contentMode="scaleAspectFill" distribution="fillEqually" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SfT-zy-1YC">
+                        <rect key="frame" x="8" y="8" width="399" height="37"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jSR-Ie-4Hz">
-                                <rect key="frame" x="0.0" y="0.0" width="33" height="20.5"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alarm.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="7xy-wt-gWW">
+                                <rect key="frame" x="0.0" y="8" width="127.5" height="19.5"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jSR-Ie-4Hz">
+                                <rect key="frame" x="135.5" y="8.5" width="128" height="20.5"/>
+                                <color key="backgroundColor" red="1" green="0.98866139909999995" blue="0.2601297152" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alarm.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="7xy-wt-gWW">
-                                <rect key="frame" x="179" y="-0.5" width="19" height="19.5"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adY-xw-pJK">
-                                <rect key="frame" x="344" y="0.0" width="38" height="20.5"/>
+                                <rect key="frame" x="271.5" y="8.5" width="127.5" height="20.5"/>
+                                <color key="backgroundColor" red="0.1137254902" green="0.60784313729999995" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -36,6 +39,12 @@
                         </subviews>
                     </stackView>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="SfT-zy-1YC" secondAttribute="bottom" constant="8" id="0de-yg-NTh"/>
+                    <constraint firstAttribute="trailing" secondItem="SfT-zy-1YC" secondAttribute="trailing" constant="8" id="Em1-PE-GZN"/>
+                    <constraint firstItem="SfT-zy-1YC" firstAttribute="leading" secondItem="AGY-pl-C8K" secondAttribute="leading" constant="8" id="iSO-dz-TJ2"/>
+                    <constraint firstItem="SfT-zy-1YC" firstAttribute="top" secondItem="AGY-pl-C8K" secondAttribute="top" constant="8" id="qFj-kI-c4F"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="clockImageView" destination="7xy-wt-gWW" id="kps-aI-zNq"/>

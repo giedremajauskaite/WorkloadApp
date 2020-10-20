@@ -16,7 +16,7 @@ class TasksTableViewController: UIViewController  {
     
     var dynamicTasksController = DynamicTasksController()
     var alert = Alert()
-    
+    var onDismiss: (() -> ())?
     var alertTime: Int  = 90
     var datePicker: String = ""
     
@@ -40,6 +40,7 @@ class TasksTableViewController: UIViewController  {
     }
     
     
+    
     @IBAction func saveTask(_ sender: UIBarButtonItem) {
         
         let newTask = Tasks()
@@ -53,7 +54,7 @@ class TasksTableViewController: UIViewController  {
             dynamicTasksController.save(task: newTask)
             
         }
-        
+        self.onDismiss?()
         navigationController?.popToRootViewController(animated: true)
     }
     

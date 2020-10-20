@@ -127,7 +127,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ryA-BV-bLh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="914" y="530"/>
+            <point key="canvasLocation" x="1246" y="510"/>
         </scene>
         <!--DynamicTasksController-->
         <scene sceneID="O37-0y-o52">
@@ -137,7 +137,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gxr-bq-zth" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1312" y="530"/>
+            <point key="canvasLocation" x="822" y="510"/>
         </scene>
         <!--Tasks Table View Controller-->
         <scene sceneID="NNC-Oa-QvZ">
