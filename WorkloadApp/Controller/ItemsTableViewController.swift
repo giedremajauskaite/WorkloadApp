@@ -9,12 +9,9 @@ import UIKit
 import RealmSwift
 
 class ItemsTableViewController: UITableViewController {
-
     
     @IBOutlet weak var itemsSearchBar: UISearchBar!
-    
-    @IBOutlet var itemsDataSource: UITableView!
-    
+    @IBOutlet weak var itemsDataSource: UITableView!
     
     var categoryItems: Results<Items>?
     let realm = try! Realm()
@@ -25,9 +22,10 @@ class ItemsTableViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         itemsSearchBar.delegate = self
-   //     itemsDataSource.dataSource = self
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,41 +33,38 @@ class ItemsTableViewController: UITableViewController {
         title = selectedCategory!.title
         
     }
-
+    
     // MARK: - Table view data source
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        
         return categoryItems?.count ?? 1
+        
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath)
-
+        
         if let item = categoryItems?[indexPath.row] {
-
             cell.textLabel?.text = item.title
-
         } else {
             cell.textLabel?.text = "No Items added"
         }
         return cell
-    }
-
-    func loadItems() {
-
-        categoryItems = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
-        self.tableView.reloadData()
+        
     }
     
+    func loadItems() {
+        
+        categoryItems = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
+        self.tableView.reloadData()
+        
+    }
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
         var textField = UITextField()
-        
         let alert = UIAlertController(title: "Add new Item", message: "", preferredStyle: .alert)
-        
         let action = UIAlertAction(title: "Save", style: .default) { (action) in
             
             if let currentCategory = self.selectedCategory {
@@ -83,9 +78,8 @@ class ItemsTableViewController: UITableViewController {
                     print("Error saving new Item, \(error)")
                 }
             }
-            
             self.tableView.reloadData()
-        
+            
         }
         
         alert.addTextField { (alertTextField) in
@@ -106,13 +100,11 @@ class ItemsTableViewController: UITableViewController {
     
 }
 
-
 extension ItemsTableViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ itemsSearchBar: UISearchBar) {
         
         categoryItems = categoryItems?.filter("title CONTAINS[cd] %@", itemsSearchBar.text!)
-        
         self.tableView.reloadData()
         
     }
@@ -125,10 +117,8 @@ extension ItemsTableViewController: UISearchBarDelegate {
             DispatchQueue.main.async {
                 itemsSearchBar.resignFirstResponder()
             }
-            
         }
         
     }
-    
     
 }

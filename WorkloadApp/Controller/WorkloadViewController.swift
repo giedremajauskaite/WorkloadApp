@@ -7,24 +7,19 @@
 
 import UIKit
 
-class WorkloadViewController: UIViewController, UISearchBarDelegate {
-
+class WorkloadViewController: UIViewController {
+    
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var segmentsLabel: UISegmentedControl!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var itemsContainer: UIView!
     @IBOutlet weak var tasksContainer: UIView!
     
- //   var tasksDataSource = TasksTableViewController()
-  //  var itemsDataSource = ItemsTableViewController()
-    
     var dynamicItemsController: DynamicItemsController?
     var dynamicTasksController: DynamicTasksController?
     
-    var itemsVC = DynamicItemsController.self()
-    var tasksVC = DynamicTasksController.self()
-    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         searchBar.delegate = self
         
@@ -36,24 +31,18 @@ class WorkloadViewController: UIViewController, UISearchBarDelegate {
         
         self.itemsContainer.isHidden = true
         self.segmentsLabel.selectedSegmentIndex = 0
-    //    tasksContainer = tasksDataSource
-     //   self.dynamicTasksController.loadTasks()
         
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        
         
         if segue.identifier == "TasksSegue" {
             let destinationVC = segue.destination as! DynamicTasksController
             self.dynamicTasksController = destinationVC
-            print("prepare tasks \(self.dynamicTasksController?.description)")
             destinationVC.loadTasks()
         } else if segue.identifier == "ItemsSegue" {
             let destinationVC = segue.destination as! DynamicItemsController
             self.dynamicItemsController = destinationVC
-            print("prepare items \(self.dynamicItemsController?.description)")
             destinationVC.loadCategories()
         } else if segue.identifier == "CreateNewTask" {
             let destinationVC = segue.destination as! TasksTableViewController
@@ -63,7 +52,6 @@ class WorkloadViewController: UIViewController, UISearchBarDelegate {
         }
         
     }
-    
     
     @IBAction func segmentsIndexChanged(_ sender: UISegmentedControl) {
         
@@ -77,9 +65,7 @@ class WorkloadViewController: UIViewController, UISearchBarDelegate {
         
     }
     
-    
-    
-//MARK: - addNewElementPressed
+    //MARK: - addNewElementPressed
     
     @IBAction func addNewElementPressed(_ sender: UIBarButtonItem) {
         
@@ -93,11 +79,8 @@ class WorkloadViewController: UIViewController, UISearchBarDelegate {
                 let newCategory = Category()
                 
                 newCategory.title = textField.text!
-                print("save items \(self.dynamicItemsController?.description)")
                 self.dynamicItemsController?.save(category: newCategory)
-           //     self.dynamicItemsController.loadCategories()
             }
-                    
             
             alert.addTextField { (alertTextField) in
                 alertTextField.placeholder = "Create new Category"
@@ -118,14 +101,36 @@ class WorkloadViewController: UIViewController, UISearchBarDelegate {
         }
         
     }
+    
+}
 
-
-// func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//
-//}
-//
-// func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//
-//}
-
+//MARK: - SearchBar
+extension WorkloadViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        if segmentsLabel.selectedSegmentIndex == 0 {
+            self.dynamicTasksController?.searchTasks(searchBar)
+        } else {
+            self.dynamicItemsController?.searchCategories(searchBar)
+        }
+        
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchBar.text?.count == 0 {
+            if segmentsLabel.selectedSegmentIndex == 0 {
+                self.dynamicTasksController?.loadTasks()
+            } else {
+                self.dynamicItemsController?.loadCategories()
+            }
+            
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
+        
+    }
+    
 }

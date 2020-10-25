@@ -22,9 +22,6 @@
 		E25E38A12527DFF200113305 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E25E38A02527DFF200113305 /* Assets.xcassets */; };
 		E25E38A42527DFF200113305 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E25E38A22527DFF200113305 /* LaunchScreen.storyboard */; };
 		E2B75534253CC8510048451D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B75533253CC8510048451D /* Alert.swift */; };
-		E2B7553C253E153E0048451D /* TaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2B7553B253E153E0048451D /* TaskCell.xib */; };
-		E2B7553F253E19EA0048451D /* TaskCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B7553E253E19EA0048451D /* TaskCellTableViewCell.swift */; };
-		E2B75542253F2D8D0048451D /* TestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B75541253F2D8D0048451D /* TestTableViewController.swift */; };
 		E2CDE802252E58990059EF60 /* DynamicTasks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2CDE801252E58990059EF60 /* DynamicTasks.storyboard */; };
 		E2CDE805252E59010059EF60 /* DynamicTasksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CDE804252E59010059EF60 /* DynamicTasksController.swift */; };
 /* End PBXBuildFile section */
@@ -49,9 +46,6 @@
 		E25E38A32527DFF200113305 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E25E38A52527DFF200113305 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2B75533253CC8510048451D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
-		E2B7553B253E153E0048451D /* TaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskCell.xib; sourceTree = "<group>"; };
-		E2B7553E253E19EA0048451D /* TaskCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellTableViewCell.swift; sourceTree = "<group>"; };
-		E2B75541253F2D8D0048451D /* TestTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableViewController.swift; sourceTree = "<group>"; };
 		E2CDE801252E58990059EF60 /* DynamicTasks.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DynamicTasks.storyboard; sourceTree = "<group>"; };
 		E2CDE804252E59010059EF60 /* DynamicTasksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicTasksController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,8 +85,6 @@
 				E25E389D2527DFF100113305 /* Main.storyboard */,
 				E21432EF252BB1EC001C508B /* DynamicItems.storyboard */,
 				E2CDE801252E58990059EF60 /* DynamicTasks.storyboard */,
-				E2B7553B253E153E0048451D /* TaskCell.xib */,
-				E2B7553E253E19EA0048451D /* TaskCellTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -105,7 +97,6 @@
 				E20C84E22528F76E005656E4 /* TasksTableViewController.swift */,
 				E21432F2252BB2D4001C508B /* DynamicItemsController.swift */,
 				E20C84E52528F85D005656E4 /* ItemsTableViewController.swift */,
-				E2B75541253F2D8D0048451D /* TestTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -217,7 +208,6 @@
 				E21432F0252BB1EC001C508B /* DynamicItems.storyboard in Resources */,
 				E25E38A12527DFF200113305 /* Assets.xcassets in Resources */,
 				E25E389F2527DFF100113305 /* Main.storyboard in Resources */,
-				E2B7553C253E153E0048451D /* TaskCell.xib in Resources */,
 				E2CDE802252E58990059EF60 /* DynamicTasks.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,11 +265,9 @@
 				E25E38982527DFF100113305 /* AppDelegate.swift in Sources */,
 				E20C84E62528F85D005656E4 /* ItemsTableViewController.swift in Sources */,
 				E20C84E32528F76E005656E4 /* TasksTableViewController.swift in Sources */,
-				E2B7553F253E19EA0048451D /* TaskCellTableViewCell.swift in Sources */,
 				E2CDE805252E59010059EF60 /* DynamicTasksController.swift in Sources */,
 				E2B75534253CC8510048451D /* Alert.swift in Sources */,
 				E20C84F7252A427B005656E4 /* Items.swift in Sources */,
-				E2B75542253F2D8D0048451D /* TestTableViewController.swift in Sources */,
 				E21432F3252BB2D4001C508B /* DynamicItemsController.swift in Sources */,
 				E20C84F3252A41BD005656E4 /* Tasks.swift in Sources */,
 				E25E389A2527DFF100113305 /* SceneDelegate.swift in Sources */,
