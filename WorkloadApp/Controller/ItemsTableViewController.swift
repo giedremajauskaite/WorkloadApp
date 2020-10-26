@@ -47,10 +47,29 @@ class ItemsTableViewController: UITableViewController {
         
         if let item = categoryItems?[indexPath.row] {
             cell.textLabel?.text = item.title
+            cell.accessoryType = item.done ? .checkmark : .none
         } else {
             cell.textLabel?.text = "No Items added"
         }
         return cell
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if let item = categoryItems?[indexPath.row] {
+            do {
+                try realm.write {
+                    item.done = !item.done
+                }
+            } catch {
+                print("Error saving done status, \(error)")
+            }
+        }
+        
+        tableView.reloadData()
+        
+        tableView.deselectRow(at: indexPath, animated: true)
         
     }
     
@@ -72,6 +91,7 @@ class ItemsTableViewController: UITableViewController {
                     try self.realm.write {
                         let newItem = Items()
                         newItem.title = textField.text!
+                        newItem.dateCreated = Date()
                         currentCategory.items.append(newItem)
                     }
                 } catch {
@@ -104,7 +124,7 @@ extension ItemsTableViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ itemsSearchBar: UISearchBar) {
         
-        categoryItems = categoryItems?.filter("title CONTAINS[cd] %@", itemsSearchBar.text!)
+        categoryItems = categoryItems?.filter("title CONTAINS[cd] %@", itemsSearchBar.text!).sorted(byKeyPath: "dateCreated", ascending: true)
         self.tableView.reloadData()
         
     }

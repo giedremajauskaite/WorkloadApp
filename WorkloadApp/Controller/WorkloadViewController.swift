@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class WorkloadViewController: UIViewController {
     
@@ -17,6 +18,7 @@ class WorkloadViewController: UIViewController {
     
     var dynamicItemsController: DynamicItemsController?
     var dynamicTasksController: DynamicTasksController?
+    let center = UNUserNotificationCenter.current()
     
     override func viewDidLoad() {
         
@@ -31,6 +33,12 @@ class WorkloadViewController: UIViewController {
         
         self.itemsContainer.isHidden = true
         self.segmentsLabel.selectedSegmentIndex = 0
+        
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+            if !granted {
+                print("Error granting notifications, \(error!)")
+            }
+        }
         
     }
     
@@ -66,7 +74,6 @@ class WorkloadViewController: UIViewController {
     }
     
     //MARK: - addNewElementPressed
-    
     @IBAction func addNewElementPressed(_ sender: UIBarButtonItem) {
         
         if segmentsLabel.selectedSegmentIndex == 1 {
@@ -101,6 +108,29 @@ class WorkloadViewController: UIViewController {
         }
         
     }
+    
+    //MARK: - Alert Notification
+//    func scheduleNotification() {
+//        
+//        let center = UNUserNotificationCenter.current()
+//        
+//        let content = UNMutableNotificationContent()
+//        content.title = "Task reminder"
+//        content.body = "Task's text"
+//        content.categoryIdentifier = "alarm"
+//        content.sound = UNNotificationSound.default
+//        
+//        var dateComponents = DateComponents()
+//        dateComponents.hour = 10
+//        dateComponents.minute = 30
+//        dateComponents.second = 00
+//        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+//        
+//        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+//        center.add(request)
+//        
+//    }
+    
     
 }
 
