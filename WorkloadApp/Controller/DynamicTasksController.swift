@@ -7,8 +7,9 @@
 
 import UIKit
 import RealmSwift
+import SwipeCellKit
 
-class DynamicTasksController: UITableViewController {
+class DynamicTasksController: UITableViewController, SwipeTableViewCellDelegate {
     
     var tasksDBResults: Results<Tasks>?
     let realm = try! Realm()
@@ -35,7 +36,8 @@ class DynamicTasksController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! SwipeTableViewCell
+        cell.delegate = self
         
         if let task = tasksDBResults?[indexPath.row] {
             cell.textLabel?.text = task.title
@@ -53,6 +55,21 @@ class DynamicTasksController: UITableViewController {
         
     }
     
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        
+        guard orientation == .right else { return nil }
+
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            self.deleteTask(at: indexPath)
+        }
+
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "delete")
+
+        return [deleteAction]
+        
+    }
+    
     func loadTasks() {
         
         tasksDBResults = realm.objects(Tasks.self)
@@ -67,6 +84,21 @@ class DynamicTasksController: UITableViewController {
             }
         } catch {
             print("Error saving context, \(error)")
+        }
+        loadTasks()
+        
+    }
+    
+    func deleteTask(at indexPath: IndexPath){
+        
+        if let task = tasksDBResults?[indexPath.row] {
+            do {
+                try realm.write {
+                   realm.delete(task)
+                }
+            } catch {
+                print("Error deleting Task, \(error)")
+            }
         }
         loadTasks()
         

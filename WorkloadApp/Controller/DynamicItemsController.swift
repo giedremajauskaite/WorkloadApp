@@ -7,8 +7,9 @@
 
 import UIKit
 import RealmSwift
+import SwipeCellKit
 
-class DynamicItemsController: UITableViewController, UISearchBarDelegate {
+class DynamicItemsController: UITableViewController, UISearchBarDelegate, SwipeTableViewCellDelegate {
     
     @IBOutlet var categoriesDataSource: UITableView!
     
@@ -20,7 +21,6 @@ class DynamicItemsController: UITableViewController, UISearchBarDelegate {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        
     }
     
     // MARK: - Table view data source
@@ -32,7 +32,9 @@ class DynamicItemsController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SwipeTableViewCell
+        
+        cell.delegate = self
         
         if let category = categoriesDBResults?[indexPath.row] {
             cell.textLabel?.text = category.title
@@ -42,6 +44,19 @@ class DynamicItemsController: UITableViewController, UISearchBarDelegate {
         
         return cell
         
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            self.deleteCategory(at: indexPath)
+        }
+
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "delete")
+
+        return [deleteAction]
     }
     
     func loadCategories() {
@@ -59,6 +74,21 @@ class DynamicItemsController: UITableViewController, UISearchBarDelegate {
             }
         } catch {
             print("Error saving context, \(error)")
+        }
+        loadCategories()
+        
+    }
+    
+    func deleteCategory(at indexPath: IndexPath){
+        
+        if let category = categoriesDBResults?[indexPath.row] {
+            do {
+                try realm.write {
+                   realm.delete(category)
+                }
+            } catch {
+                print("Error deleting Category, \(error)")
+            }
         }
         loadCategories()
         

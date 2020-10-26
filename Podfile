@@ -8,4 +8,6 @@ target 'WorkloadApp' do
   # Pods for WorkloadApp
   pod 'RealmSwift'
 
+  pod 'SwipeCellKit'
+
 end

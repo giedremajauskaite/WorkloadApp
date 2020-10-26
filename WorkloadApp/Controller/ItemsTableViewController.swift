@@ -7,8 +7,9 @@
 
 import UIKit
 import RealmSwift
+import SwipeCellKit
 
-class ItemsTableViewController: UITableViewController {
+class ItemsTableViewController: UITableViewController, SwipeTableViewCellDelegate {
     
     @IBOutlet weak var itemsSearchBar: UISearchBar!
     @IBOutlet weak var itemsDataSource: UITableView!
@@ -43,7 +44,8 @@ class ItemsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! SwipeTableViewCell
+        cell.delegate = self
         
         if let item = categoryItems?[indexPath.row] {
             cell.textLabel?.text = item.title
@@ -53,6 +55,19 @@ class ItemsTableViewController: UITableViewController {
         }
         return cell
         
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            self.deleteItem(at: indexPath)
+        }
+
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "delete")
+
+        return [deleteAction]
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -79,6 +94,8 @@ class ItemsTableViewController: UITableViewController {
         self.tableView.reloadData()
         
     }
+    
+    
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
@@ -115,6 +132,21 @@ class ItemsTableViewController: UITableViewController {
         alert.addAction(action)
         
         present(alert, animated: true, completion: nil )
+        
+    }
+    
+    func deleteItem(at indexPath: IndexPath){
+        
+        if let item = categoryItems?[indexPath.row] {
+            do {
+                try realm.write {
+                   realm.delete(item)
+                }
+            } catch {
+                print("Error deleting Item, \(error)")
+            }
+        }
+        loadItems()
         
     }
     
