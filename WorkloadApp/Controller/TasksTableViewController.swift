@@ -14,10 +14,12 @@ class TasksTableViewController: UIViewController  {
     @IBOutlet weak var taskDate: UIDatePicker!
     @IBOutlet weak var alertPicker: UIPickerView!
     
+    let notifications = Notifications()
+    
     var dynamicTasksController = DynamicTasksController()
     var alert = Alert()
     var onDismiss: (() -> ())?
-    var alertTime: Int  = 90
+    var alertTime: Int = -1
     var datePicker: String = ""
     
     override func viewDidLoad() {
@@ -51,6 +53,13 @@ class TasksTableViewController: UIViewController  {
             newTask.alert = alertTime
             
             dynamicTasksController.save(task: newTask)
+            
+            //Alert not equal to "None" from alertTime picker
+            if alertTime != -1 {
+                let notificationType = taskName
+                self.notifications.scheduleNotification(notificationType: notificationType)
+            }
+            
         }
         self.onDismiss?()
         navigationController?.popToRootViewController(animated: true)

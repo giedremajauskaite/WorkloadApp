@@ -21,6 +21,7 @@
 		E25E389F2527DFF100113305 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E25E389D2527DFF100113305 /* Main.storyboard */; };
 		E25E38A12527DFF200113305 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E25E38A02527DFF200113305 /* Assets.xcassets */; };
 		E25E38A42527DFF200113305 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E25E38A22527DFF200113305 /* LaunchScreen.storyboard */; };
+		E2974CD82548C95200A3B962 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2974CD72548C95200A3B962 /* Notifications.swift */; };
 		E2B75534253CC8510048451D /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B75533253CC8510048451D /* Alert.swift */; };
 		E2CDE802252E58990059EF60 /* DynamicTasks.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2CDE801252E58990059EF60 /* DynamicTasks.storyboard */; };
 		E2CDE805252E59010059EF60 /* DynamicTasksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CDE804252E59010059EF60 /* DynamicTasksController.swift */; };
@@ -45,6 +46,7 @@
 		E25E38A02527DFF200113305 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E25E38A32527DFF200113305 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E25E38A52527DFF200113305 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2974CD72548C95200A3B962 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		E2B75533253CC8510048451D /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		E2CDE801252E58990059EF60 /* DynamicTasks.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DynamicTasks.storyboard; sourceTree = "<group>"; };
 		E2CDE804252E59010059EF60 /* DynamicTasksController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicTasksController.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				E20C84E22528F76E005656E4 /* TasksTableViewController.swift */,
 				E21432F2252BB2D4001C508B /* DynamicItemsController.swift */,
 				E20C84E52528F85D005656E4 /* ItemsTableViewController.swift */,
+				E2974CD72548C95200A3B962 /* Notifications.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2974CD82548C95200A3B962 /* Notifications.swift in Sources */,
 				E25E389C2527DFF100113305 /* WorkloadViewController.swift in Sources */,
 				E25E38982527DFF100113305 /* AppDelegate.swift in Sources */,
 				E20C84E62528F85D005656E4 /* ItemsTableViewController.swift in Sources */,

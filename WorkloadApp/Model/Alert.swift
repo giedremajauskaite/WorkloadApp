@@ -9,17 +9,17 @@ import Foundation
 
 struct Alert {
     
-    let alertsIntervals:[(name: String, time: Int)] = [("None", 90),
+    let alertsIntervals:[(name: String, time: Int)] = [("None", -1),
                                                        ("At the time of event", 0),
                                                        ("5 minutes before", 5),
                                                        ("10 minutes before", 10),
                                                        ("15 minutes before", 15),
-                                                       ("30 minutes before", 3),
-                                                       ("1 hour before", 1),
-                                                       ("2 hours before",2),
-                                                       ("1 day before", 1),
-                                                       ("2 days before", 2),
-                                                       ("1 week before", 1)]
+                                                       ("30 minutes before", 30),
+                                                       ("1 hour before", 60),
+                                                       ("2 hours before",120),
+                                                       ("1 day before", 60*24),
+                                                       ("2 days before", 60*24*2),
+                                                       ("1 week before", 60*24*7)]
 
 //  var  alertsIntervals = ["None" : 0,
 //                     "At the time of event" : 0,

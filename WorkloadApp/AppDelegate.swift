@@ -7,20 +7,27 @@
 
 import UIKit
 import RealmSwift
+import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    let notificationCenter = UNUserNotificationCenter.current()
+    let notifications = Notifications()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         
-        print(Realm.Configuration.defaultConfiguration.fileURL)
+        // Override point for customization after application launch.
+       // print(Realm.Configuration.defaultConfiguration.fileURL)
         
         do {
             _ = try Realm()
         } catch {
             print("Error initialising realm db, \(error)")
         }
+        
+        notifications.notificationCenter.delegate = notifications
+        notifications.userRequest()
         
         return true
     }
@@ -42,3 +49,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+// To receive notifications even when the application is in the foreground
+//extension AppDelegate: UNUserNotificationCenterDelegate {
+//
+//    func userNotificationCenter(_ center: UNUserNotificationCenter,
+//                                willPresent notification: UNNotification,
+//                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+//
+//        completionHandler([.alert, .sound])
+//    }
+//
+//    func scheduleNotification(notificationType: String) {
+//
+//        let content = UNMutableNotificationContent()
+//        let categoryIdentifire = "Delete Notification Type"
+//
+//        content.title = notificationType
+//        content.body = "This is example how to create " + notificationType
+//        content.sound = UNNotificationSound.default
+//        content.badge = 1
+//        content.categoryIdentifier = categoryIdentifire
+//
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//        let identifier = "Local Notification"
+//        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+//
+//        notificationCenter.add(request) { (error) in
+//            if let error = error {
+//                print("Error \(error.localizedDescription)")
+//            }
+//        }
+//
+//        let snoozeAction = UNNotificationAction(identifier: "Snooze", title: "Snooze", options: [])
+//        let deleteAction = UNNotificationAction(identifier: "DeleteAction", title: "Delete", options: [.destructive])
+//        let category = UNNotificationCategory(identifier: categoryIdentifire,
+//                                              actions: [snoozeAction, deleteAction],
+//                                              intentIdentifiers: [],
+//                                              options: [])
+//
+//        notificationCenter.setNotificationCategories([category])
+//    }
+//}
