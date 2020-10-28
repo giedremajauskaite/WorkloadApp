@@ -8,7 +8,7 @@
 import UIKit
 import RealmSwift
 
-class TasksTableViewController: UIViewController  {
+class TasksTableViewController: UIViewController, UITextFieldDelegate  {
     
     @IBOutlet weak var taskName: UITextField!
     @IBOutlet weak var taskDate: UIDatePicker!
@@ -27,16 +27,21 @@ class TasksTableViewController: UIViewController  {
         super.viewDidLoad()
         alertPicker.delegate = self
         alertPicker.dataSource = self
+        taskName.delegate = self
         
         //Default datePicker date
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd HH:mm:ss"
         datePicker = df.string(from: Date())
-    
+        
+        //Looks for single or multiple taps.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
     }
     
     @IBAction func datePickerChanged(_ sender: UIDatePicker) {
-        
+        view.endEditing(true)
         let df = DateFormatter()
         df.dateFormat = "yyyy-MM-dd HH:mm:ss"
         datePicker = df.string(from: sender.date)
@@ -95,6 +100,23 @@ class TasksTableViewController: UIViewController  {
             date1 = date!
         }
         return date1
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
     }
 }
 

@@ -74,11 +74,12 @@ class WorkloadViewController: UIViewController {
             let alert = UIAlertController(title: "Add new category", message: "", preferredStyle: .alert)
             
             let actionAdd = UIAlertAction(title: "Save", style: .default) { (action) in
+                if !textField.text!.isEmpty {
                 //Create new category
                 let newCategory = Category()
-                
                 newCategory.title = textField.text!
                 self.dynamicItemsController?.save(category: newCategory)
+                }
             }
             
             alert.addTextField { (alertTextField) in

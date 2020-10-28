@@ -103,7 +103,7 @@ class ItemsTableViewController: UITableViewController, SwipeTableViewCellDelegat
         let alert = UIAlertController(title: "Add new Item", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Save", style: .default) { (action) in
             
-            if let currentCategory = self.selectedCategory {
+            if let currentCategory = self.selectedCategory, !textField.text!.isEmpty {
                 do {
                     try self.realm.write {
                         let newItem = Items()
