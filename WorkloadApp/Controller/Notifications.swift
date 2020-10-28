@@ -24,18 +24,20 @@ class Notifications: NSObject, UNUserNotificationCenterDelegate {
         }
     }
     
-    func scheduleNotification(notificationType: String) {
+    func scheduleNotification(notificationText: String, notificationDate: Date) {
         
         let content = UNMutableNotificationContent()
         
-        content.body = notificationType
+        content.body = notificationText
         content.sound = UNNotificationSound.default
         content.badge = 1
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 20, repeats: false)
+        let triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: notificationDate)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+        
         let identifier = UUID().uuidString
         let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-        
         notificationCenter.add(request) { (error) in
             if let error = error {
                 print("Error \(error.localizedDescription)")
