@@ -25,8 +25,11 @@ class ItemsTableViewController: UITableViewController, SwipeTableViewCellDelegat
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .light
         itemsSearchBar.delegate = self
         
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+//        view.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -127,6 +130,8 @@ class ItemsTableViewController: UITableViewController, SwipeTableViewCellDelegat
         let actionCancel = UIAlertAction(title: "Cancel", style: .default) { (action) in
             //Dismiss or present?
         }
+        actionCancel.setValue(UIColor.black, forKey: "titleTextColor")
+        action.setValue(UIColor.black, forKey: "titleTextColor")
         
         alert.addAction(actionCancel)
         alert.addAction(action)
@@ -148,6 +153,26 @@ class ItemsTableViewController: UITableViewController, SwipeTableViewCellDelegat
         }
         loadItems()
         
+    }
+    
+//    @objc func dismissKeyboard() {
+//        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+//       // view.endEditing(true)
+//
+//        DispatchQueue.main.async {
+//            self.itemsSearchBar.resignFirstResponder()
+//        }
+        
+//    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+        
+        print("cia")
+        DispatchQueue.main.async {
+            self.itemsSearchBar.resignFirstResponder()
+        }
     }
     
 }

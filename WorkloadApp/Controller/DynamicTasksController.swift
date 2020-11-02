@@ -17,6 +17,9 @@ class DynamicTasksController: UITableViewController, SwipeTableViewCellDelegate 
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .light
+        
+        tableView.delegate = self
         
     }
     
@@ -42,7 +45,8 @@ class DynamicTasksController: UITableViewController, SwipeTableViewCellDelegate 
         if let task = tasksDBResults?[indexPath.row] {
             cell.textLabel?.text = task.title
             cell.detailTextLabel?.text = String(task.time.dropLast(3))
-            if task.alert == false {
+            print(task.alert)
+            if task.alert == "None" {
                 cell.imageView?.isHidden = true
             } else {
                 cell.imageView?.isHidden = false
@@ -68,6 +72,26 @@ class DynamicTasksController: UITableViewController, SwipeTableViewCellDelegate 
 
         return [deleteAction]
         
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let task = tasksDBResults?[indexPath.row]
+
+        let message = //"Title: " + task!.title + "\n" +
+                      "Event's time: " + String(task!.time) + "\n" +
+                      "Alert: " + task!.alert
+        
+        let alert = UIAlertController(title: task!.title, message: message, preferredStyle: .alert)
+        
+        alert.view.tintColor = UIColor.black
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+        
+        loadTasks()
+
     }
     
     func loadTasks() {

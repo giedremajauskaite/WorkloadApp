@@ -11,5 +11,5 @@ import RealmSwift
 class Tasks: Object {
     @objc dynamic var time: String = ""
     @objc dynamic var title: String = ""
-    @objc dynamic var alert: Bool = false
+    @objc dynamic var alert: String = "None"
 }

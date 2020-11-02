@@ -20,11 +20,14 @@ class TasksTableViewController: UIViewController, UITextFieldDelegate  {
     var alert = Alert()
     var onDismiss: (() -> ())?
     var datePicker: String = ""
-    var alertTitle: String = ""
+    var alertTitle: String = "None"
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        overrideUserInterfaceStyle = .light
+        
         alertPicker.delegate = self
         alertPicker.dataSource = self
         taskName.delegate = self
@@ -55,7 +58,8 @@ class TasksTableViewController: UIViewController, UITextFieldDelegate  {
         if let taskName = taskName.text, !taskName.isEmpty {
             newTask.title = taskName
             newTask.time = datePicker
-            newTask.alert = taskName == "None" ? false : true
+        //    newTask.alert = alertTitle == "None" ? false : true
+            newTask.alert = alertTitle
             
             dynamicTasksController.save(task: newTask)
             

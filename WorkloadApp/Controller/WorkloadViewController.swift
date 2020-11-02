@@ -21,7 +21,16 @@ class WorkloadViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .light
+        
         searchBar.delegate = self
+        
+//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WorkloadViewController.dismissKeyboard))
+//       view.addGestureRecognizer(tap)
+        
+//        let tapGestureReconizer = UITapGestureRecognizer(target: self, action: "tap:")
+//        tapGestureReconizer.cancelsTouchesInView = false
+//        view.addGestureRecognizer(tapGestureReconizer)
         
         //set Date label
         let date = Date()
@@ -33,6 +42,37 @@ class WorkloadViewController: UIViewController {
         self.segmentsLabel.selectedSegmentIndex = 0
         
     }
+    
+//    @objc func dismissKeyboard() {
+//        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+//
+//        if segmentsLabel.selectedSegmentIndex == 0 {
+//            self.dynamicTasksController?.loadTasks()
+//        } else {
+//            self.dynamicItemsController?.loadCategories()
+//        }
+//
+//        DispatchQueue.main.async {
+//            self.searchBar.resignFirstResponder()
+//        }
+//    }
+    
+//    func tap(sender: UITapGestureRecognizer) {
+// //    view.endEditing(true)
+//     // or use
+// //    noteTextView.resignFirstResponder()
+//     // or use
+//  //   view.super().endEditing(true)
+//     // or use
+//        searchBar.resignFirstResponder()
+//    }
+//
+//    func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+//        self.view.endEditing(true)
+//        self.searchBar.endEditing(true)
+//        searchBar.resignFirstResponder()
+//    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -90,6 +130,9 @@ class WorkloadViewController: UIViewController {
             let actionCancel = UIAlertAction(title: "Cancel", style: .default) { (action) in
                 //Dismiss or present?
             }
+            
+            actionCancel.setValue(UIColor.black, forKey: "titleTextColor")
+            actionAdd.setValue(UIColor.black, forKey: "titleTextColor")
             
             alert.addAction(actionCancel)
             alert.addAction(actionAdd)

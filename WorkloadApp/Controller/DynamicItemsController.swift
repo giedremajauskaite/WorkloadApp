@@ -19,6 +19,7 @@ class DynamicItemsController: UITableViewController, UISearchBarDelegate, SwipeT
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .light
         tableView.dataSource = self
         tableView.delegate = self
     }
