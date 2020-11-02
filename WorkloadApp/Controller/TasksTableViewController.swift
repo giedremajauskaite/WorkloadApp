@@ -34,7 +34,8 @@ class TasksTableViewController: UIViewController, UITextFieldDelegate  {
         
         //Default datePicker date
         let df = DateFormatter()
-        df.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        df.locale = NSLocale.current
+        df.dateFormat = "yyyy-MM-dd HH:mm"
         datePicker = df.string(from: Date())
         
         //Looks for single or multiple taps.
@@ -46,7 +47,8 @@ class TasksTableViewController: UIViewController, UITextFieldDelegate  {
     @IBAction func datePickerChanged(_ sender: UIDatePicker) {
         view.endEditing(true)
         let df = DateFormatter()
-        df.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        df.locale = NSLocale.current
+        df.dateFormat = "yyyy-MM-dd HH:mm"
         datePicker = df.string(from: sender.date)
         
     }
@@ -77,9 +79,10 @@ class TasksTableViewController: UIViewController, UITextFieldDelegate  {
     
     //Calculate alert time using time and alert params from pickers as inputs
     func calculateAlertTime(datePicker: String, alertTitle: String) -> Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let date = dateFormatter.date(from: datePicker)
+        let df = DateFormatter()
+        df.locale = NSLocale.current
+        df.dateFormat = "yyyy-MM-dd HH:mm"
+        let date = df.date(from: datePicker)
         let calendar = Calendar.current
         let date1: Date
         

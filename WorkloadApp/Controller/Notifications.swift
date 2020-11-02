@@ -32,7 +32,7 @@ class Notifications: NSObject, UNUserNotificationCenterDelegate {
         content.sound = UNNotificationSound.default
         content.badge = 1
         
-        let triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: notificationDate)
+        let triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute], from: notificationDate)
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
         

@@ -44,8 +44,7 @@ class DynamicTasksController: UITableViewController, SwipeTableViewCellDelegate 
         
         if let task = tasksDBResults?[indexPath.row] {
             cell.textLabel?.text = task.title
-            cell.detailTextLabel?.text = String(task.time.dropLast(3))
-            print(task.alert)
+            cell.detailTextLabel?.text = String(task.time) //String(task.time.dropLast(3))
             if task.alert == "None" {
                 cell.imageView?.isHidden = true
             } else {

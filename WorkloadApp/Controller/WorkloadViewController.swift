@@ -28,14 +28,10 @@ class WorkloadViewController: UIViewController {
 //        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WorkloadViewController.dismissKeyboard))
 //       view.addGestureRecognizer(tap)
         
-//        let tapGestureReconizer = UITapGestureRecognizer(target: self, action: "tap:")
-//        tapGestureReconizer.cancelsTouchesInView = false
-//        view.addGestureRecognizer(tapGestureReconizer)
-        
         //set Date label
         let date = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMM dd"
+        formatter.dateFormat = "EEEE, MMM d"
         self.dateLabel.text = formatter.string(from: date)
         
         self.itemsContainer.isHidden = true
