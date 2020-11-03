@@ -1,6 +1,10 @@
 //
-//  ViewController.swift
+//  WorkloadViewController.swift
 //  WorkloadApp
+//  Workload app has 2 sections. Tasks and items. Tasks might be time dependent - has alert functionaly.
+//  Items are clasified to categories and each category can have elements (items).
+//  Elements can be checked/uncheked
+//  Main screen.
 //
 //  Created by Giedre Majauskaite on 10/2/20.
 //
@@ -21,14 +25,10 @@ class WorkloadViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        overrideUserInterfaceStyle = .light
         
         searchBar.delegate = self
         
-//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WorkloadViewController.dismissKeyboard))
-//       view.addGestureRecognizer(tap)
-        
-        //set Date label
+        //Default values
         let date = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "EEEE, MMM d"
@@ -37,39 +37,16 @@ class WorkloadViewController: UIViewController {
         self.itemsContainer.isHidden = true
         self.segmentsLabel.selectedSegmentIndex = 0
         
+        overrideUserInterfaceStyle = .light
+        
+        //Dismiss searchbar keyboard
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
     }
     
-//    @objc func dismissKeyboard() {
-//        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-//
-//        if segmentsLabel.selectedSegmentIndex == 0 {
-//            self.dynamicTasksController?.loadTasks()
-//        } else {
-//            self.dynamicItemsController?.loadCategories()
-//        }
-//
-//        DispatchQueue.main.async {
-//            self.searchBar.resignFirstResponder()
-//        }
-//    }
-    
-//    func tap(sender: UITapGestureRecognizer) {
-// //    view.endEditing(true)
-//     // or use
-// //    noteTextView.resignFirstResponder()
-//     // or use
-//  //   view.super().endEditing(true)
-//     // or use
-//        searchBar.resignFirstResponder()
-//    }
-//
-//    func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
-//        self.view.endEditing(true)
-//        self.searchBar.endEditing(true)
-//        searchBar.resignFirstResponder()
-//    }
-    
-    
+    //MARK: - prepares 2 containers for tasks and items, loads elements
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "TasksSegue" {
@@ -89,6 +66,7 @@ class WorkloadViewController: UIViewController {
         
     }
     
+    //MARK: - Function to switch Tasks and Items bar, reload elements
     @IBAction func segmentsIndexChanged(_ sender: UISegmentedControl) {
         
         if sender.selectedSegmentIndex == 0 {
@@ -102,6 +80,8 @@ class WorkloadViewController: UIViewController {
     }
     
     //MARK: - addNewElementPressed
+    //If segment = Tasks (0), performs new window - TasksTableViewController
+    //If segment = Items (1), performs alert message to create new items cagategory
     @IBAction func addNewElementPressed(_ sender: UIBarButtonItem) {
         
         if segmentsLabel.selectedSegmentIndex == 1 {
@@ -119,12 +99,11 @@ class WorkloadViewController: UIViewController {
             }
             
             alert.addTextField { (alertTextField) in
-                alertTextField.placeholder = "Create new Category"
+                alertTextField.placeholder = "Create new category"
                 textField = alertTextField
             }
             
             let actionCancel = UIAlertAction(title: "Cancel", style: .default) { (action) in
-                //Dismiss or present?
             }
             
             actionCancel.setValue(UIColor.black, forKey: "titleTextColor")
@@ -146,18 +125,29 @@ class WorkloadViewController: UIViewController {
 //MARK: - SearchBar
 extension WorkloadViewController: UISearchBarDelegate {
     
+    var isSearchBarEmpty: Bool {
+      return searchBar.text?.isEmpty ?? true
+    }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        if segmentsLabel.selectedSegmentIndex == 0 {
-            self.dynamicTasksController?.searchTasks(searchBar)
+        if !isSearchBarEmpty {
+            if segmentsLabel.selectedSegmentIndex == 0 {
+                self.dynamicTasksController?.searchTasks(searchBar)
+            } else {
+                self.dynamicItemsController?.searchCategories(searchBar)
+            }
         } else {
-            self.dynamicItemsController?.searchCategories(searchBar)
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
         }
         
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
+        //Reloads info after 'x' was pressed in the searchbarfield
         if searchBar.text?.count == 0 {
             if segmentsLabel.selectedSegmentIndex == 0 {
                 self.dynamicTasksController?.loadTasks()

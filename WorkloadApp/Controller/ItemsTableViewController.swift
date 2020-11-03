@@ -28,8 +28,6 @@ class ItemsTableViewController: UITableViewController, SwipeTableViewCellDelegat
         overrideUserInterfaceStyle = .light
         itemsSearchBar.delegate = self
         
-//        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-//        view.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,8 +96,6 @@ class ItemsTableViewController: UITableViewController, SwipeTableViewCellDelegat
         
     }
     
-    
-    
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
         var textField = UITextField()
@@ -154,16 +150,6 @@ class ItemsTableViewController: UITableViewController, SwipeTableViewCellDelegat
         loadItems()
         
     }
-    
-//    @objc func dismissKeyboard() {
-//        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-//       // view.endEditing(true)
-//
-//        DispatchQueue.main.async {
-//            self.itemsSearchBar.resignFirstResponder()
-//        }
-        
-//    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)

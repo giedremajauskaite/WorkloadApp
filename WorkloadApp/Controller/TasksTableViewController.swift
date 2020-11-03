@@ -1,6 +1,8 @@
 //
 //  TasksTableViewController.swift
 //  WorkloadApp
+//  Coresponds to Create new task window in Main.storyboard
+//  Creates new task and saves to realm db. Provides alerts details to Notification.swift file.
 //
 //  Created by Giedre Majauskaite on 10/3/20.
 //
@@ -38,12 +40,14 @@ class TasksTableViewController: UIViewController, UITextFieldDelegate  {
         df.dateFormat = "yyyy-MM-dd HH:mm"
         datePicker = df.string(from: Date())
         
-        //Looks for single or multiple taps.
+        //Looks for single or multiple taps to dismiss keyboard.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
     }
     
+    //MARK: - datePickerChanged
+    // Task date
     @IBAction func datePickerChanged(_ sender: UIDatePicker) {
         view.endEditing(true)
         let df = DateFormatter()
@@ -53,6 +57,9 @@ class TasksTableViewController: UIViewController, UITextFieldDelegate  {
         
     }
     
+    //MARK: - saveTask
+    // all task info collected after '+' is pressed and called save funtion from dynamicTasksController.swift
+    // alarm time is calculted in calculateAlertTime
     @IBAction func saveTask(_ sender: UIBarButtonItem) {
         
         let newTask = Tasks()
@@ -109,6 +116,7 @@ class TasksTableViewController: UIViewController, UITextFieldDelegate  {
         return date1
     }
     
+    // Dismiss keyboard after tasks description was filled and return button was pressed
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         textField.resignFirstResponder()
@@ -116,11 +124,13 @@ class TasksTableViewController: UIViewController, UITextFieldDelegate  {
         return true
     }
     
+    // funcion is called after single or multiple taps. Ref tap variable.
     @objc func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
     
+    // to dismiss keyboard
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         view.endEditing(true)
@@ -142,12 +152,14 @@ extension TasksTableViewController: UIPickerViewDelegate, UIPickerViewDataSource
         
     }
     
+    // show alerts descpriotions
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         return alert.alertsIntervals[row]
         
     }
     
+    // alertTitle - alerts descpriotion
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         alertTitle = alert.alertsIntervals[row]

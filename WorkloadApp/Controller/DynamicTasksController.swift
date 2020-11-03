@@ -1,6 +1,8 @@
 //
 //  DynamicTasksController.swift
 //  WorkloadApp
+//  Coresponds to DynamicTasks.storyboard
+//  TableView actions with Tasks container.
 //
 //  Created by Giedre Majauskaite on 10/7/20.
 //
@@ -32,11 +34,12 @@ class DynamicTasksController: UITableViewController, SwipeTableViewCellDelegate 
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        
+
         return 1
-        
+
     }
     
+    // TaksCell definition
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell", for: indexPath) as! SwipeTableViewCell
@@ -44,7 +47,7 @@ class DynamicTasksController: UITableViewController, SwipeTableViewCellDelegate 
         
         if let task = tasksDBResults?[indexPath.row] {
             cell.textLabel?.text = task.title
-            cell.detailTextLabel?.text = String(task.time) //String(task.time.dropLast(3))
+            cell.detailTextLabel?.text = String(task.time)
             if task.alert == "None" {
                 cell.imageView?.isHidden = true
             } else {
@@ -58,6 +61,7 @@ class DynamicTasksController: UITableViewController, SwipeTableViewCellDelegate 
         
     }
     
+    // Delete SwipeTableViewCell functionality from CocoaPods
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         
         guard orientation == .right else { return nil }
@@ -73,6 +77,7 @@ class DynamicTasksController: UITableViewController, SwipeTableViewCellDelegate 
         
     }
     
+    // TaskCell info as alert after it was selected/taped
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let task = tasksDBResults?[indexPath.row]
@@ -93,12 +98,15 @@ class DynamicTasksController: UITableViewController, SwipeTableViewCellDelegate 
 
     }
     
+    //load info from realm db
     func loadTasks() {
         
         tasksDBResults = realm.objects(Tasks.self)
         self.tableView.reloadData()
+        
     }
     
+    //Save info to realm db
     func save(task: Tasks) {
         
         do {
@@ -127,6 +135,7 @@ class DynamicTasksController: UITableViewController, SwipeTableViewCellDelegate 
         
     }
     
+    //Function is called from WorkloadViewController.swift
     func searchTasks(_ itemsSearchBar: UISearchBar) {
         
         tasksDBResults = tasksDBResults?.filter("title CONTAINS[cd] %@", itemsSearchBar.text!)
