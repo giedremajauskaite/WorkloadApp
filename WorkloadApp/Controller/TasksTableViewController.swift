@@ -10,7 +10,7 @@
 import UIKit
 import RealmSwift
 
-class TasksTableViewController: UIViewController, UITextFieldDelegate  {
+class TasksTableViewController: UITableViewController, UITextFieldDelegate  {
     
     @IBOutlet weak var taskName: UITextField!
     @IBOutlet weak var taskDate: UIDatePicker!
@@ -44,6 +44,14 @@ class TasksTableViewController: UIViewController, UITextFieldDelegate  {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
+    }
+    
+    //Create new task window headers' colour
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.tintColor = #colorLiteral(red: 0.968627451, green: 0.9490196078, blue: 0.9058823529, alpha: 1)
+//        let header = view as! UITableViewHeaderFooterView
+//        header.textLabel?.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+//        header.textLabel?.font = UIFont.systemFont(ofSize: 14, weight: .medium)
     }
     
     //MARK: - datePickerChanged
